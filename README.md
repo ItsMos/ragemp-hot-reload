@@ -93,11 +93,16 @@ mp.vehicles.new('sultanrs', localPlayer.position, {
 
 ### Server-Side
 - Vehicles, Objects, Peds, Markers, Labels
-- Checkpoints, Blips, Colshapes, Pickups, Dummies
+- Checkpoints, Blips, Pickups
 
 ### Client-Side
 - Browsers, Vehicles, Objects, Peds, Markers
 - Labels, Checkpoints, Blips
+
+### ☑️ To Do
+*Contributions are welcome.*
+- Track command handlers and data handlers
+- Track colshapes
 
 ## Error Handling
 

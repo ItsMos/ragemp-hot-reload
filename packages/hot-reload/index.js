@@ -3,7 +3,7 @@ const path = require('path')
 
 const DIRECTORY = './hotreload'
 
-const MP_POOLS = ['vehicles', 'objects', 'peds', 'markers', 'labels', 'checkpoints', 'blips', 'colshapes', 'pickups', 'dummies'];
+const MP_POOLS = ['vehicles', 'objects', 'peds', 'markers', 'labels', 'checkpoints', 'blips', 'pickups'];
 let entitiesCreated = new Set();
 let eventsCreated = [];
 
@@ -46,7 +46,7 @@ function unwrapCreationFunction(type) {
   }
 }
 
-function executeCodeWithCleanup(codeString) {
+async function executeCodeWithCleanup(codeString) {
   // console.log(`[hot-reload] Destroying ${entitiesCreated.size} entities, ${eventsCreated.length} events from the previous run.`);
 
   eventsCreated.forEach(arr => mp.events.remove(arr[0], arr[1]));
@@ -64,7 +64,7 @@ function executeCodeWithCleanup(codeString) {
   MP_POOLS.forEach(wrapCreationFunction);
 
   try {
-    eval(codeString);
+    await eval(`(async () => {${codeString}})()`);
   } catch (error) {
     console.error("[hot-reload] Error executing evaluated code: " + error);
 
